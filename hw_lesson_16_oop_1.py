@@ -19,12 +19,25 @@ class TxtFileHandler:
         try:
             with open(filepath, 'w', encoding='utf-8') as file:
                 for line in data:
-                    file.write(line + '\n')
+                    file.write(line)
         except Exception as e:
             print(f"Ошибка при записи в файл: {e}")
+
+    def append_file(self, filepath: str, *data: str) -> None:
+        """Метод для добавления данных в файл"""
+        try:
+            with open(filepath, 'a') as file:
+                for line in data:
+                    file.write(line)
+        except Exception as e:
+            print(f"Ошибка при добавлении в файл: {e}")
 
 handler =  TxtFileHandler()
 
 content = handler.read_file("test.txt")
 print(content)
+
 handler.write_file("test.txt", "This is a test string.\n")
+
+handler.append_file("test.txt", "This is another test string.")
+print(handler.read_file("test.txt"))
